@@ -1,9 +1,24 @@
 import { useContext } from "react";
 import ButtonComp from "../ui/ButtonComp";
 import { AuthContext } from "../../contexts/user";
+import { getCoordinates } from "../../requests/weatherForecastReq";
+import { ForecastContext, IForecast } from "../../contexts/weatherForecast";
 
 export default function LoggedInPage() {
     const { user } = useContext(AuthContext);
+    const { setForecasts } = useContext(ForecastContext);
+
+    async function handleSearchWeatherForecast() {
+        event?.preventDefault();
+
+        // get weather forecast for the current/next day depending if it's already past 09:00
+        const forecasts = await getCoordinates();
+
+        // store retrieved forecasts in ForecastContext's forecasts
+        if (forecasts) {
+            setForecasts(forecasts as IForecast[]);
+        }
+    }
 
     return (
         <div className="flex justify-center pt-[8rem]">
@@ -21,7 +36,7 @@ export default function LoggedInPage() {
                         placeholder="City"
                     />
                     <div className="flex justify-center w-[15em] text-[0.9em]">
-                        <ButtonComp name="Display Weather" clickFn={() => {}} />
+                        <ButtonComp name="Display Weather" clickFn={handleSearchWeatherForecast} />
                     </div>
                 </form>
             </div>

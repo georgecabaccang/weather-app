@@ -5,6 +5,7 @@ import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { AuthProvider } from "./contexts/user.tsx";
 import { BrowserRouter } from "react-router-dom";
+import { ForecastProvider } from "./contexts/weatherForecast.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 }}
             >
                 <AuthProvider>
-                    <App />
+                    <ForecastProvider>
+                        <App />
+                    </ForecastProvider>
                 </AuthProvider>
             </Auth0Provider>
         </BrowserRouter>
