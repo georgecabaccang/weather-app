@@ -33,6 +33,7 @@ export default function WeatherPage() {
                 {forecasts.map((forecast, index) => {
                     return (
                         <tr
+                            key={index}
                             className={`flex w-[100%] justify-center text-center ${
                                 index % 2 === 0 ? "bg-gray-200" : "bg-gray-50"
                             }`}
