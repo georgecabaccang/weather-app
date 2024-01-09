@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/user";
 import { useContext } from "react";
 
 export default function NavigationBar() {
-    const { logout, user } = useContext(AuthContext);
+    const { logoutUser, user } = useContext(AuthContext);
 
     return (
         <div className="border-b-2 border-black h-[5rem] px-5 flex justify-between shadow-md">
@@ -18,7 +18,7 @@ export default function NavigationBar() {
             {/* start of navigation links */}
             {user ? (
                 <div className="flex flex-grow justify-end items-center">
-                    <ButtonComp name="Logout" clickFn={logout} />
+                    <ButtonComp name="Logout" clickFn={logoutUser} />
                 </div>
             ) : null}
             {/* end of navigation links */}

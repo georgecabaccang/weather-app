@@ -1,15 +1,7 @@
-import { useContext, useEffect } from "react";
-
-import { Outlet, useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/user";
+import { Navigate, Outlet } from "react-router-dom";
 
 export default function LoggedOutRoutes() {
-    const { user } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-    useEffect(() => {
-        if (user) return navigate("/home");
-    }, [user]);
-
-    return <Outlet />;
+    return !isLoggedIn ? <Outlet /> : <Navigate to="/home" />;
 }
