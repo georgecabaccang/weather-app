@@ -1,4 +1,4 @@
-import React, { ReactNode, SetStateAction, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 
 export interface IForecast {
     country: string;
@@ -15,12 +15,12 @@ export interface IForecast {
 }
 
 interface IForecastValue {
-    setForecasts: React.Dispatch<SetStateAction<IForecast[]>>;
+    saveForecastData: (forecasts: IForecast[]) => void;
     forecasts: IForecast[];
 }
 
 export const ForecastContext = createContext<IForecastValue>({
-    setForecasts: () => {},
+    saveForecastData: () => {},
     forecasts: [
         {
             country: "",
@@ -41,7 +41,20 @@ export const ForecastContext = createContext<IForecastValue>({
 export const ForecastProvider = (props: { children: ReactNode }) => {
     const [forecasts, setForecasts] = useState<IForecast[]>([]);
 
-    const ForecastContextValues: IForecastValue = { forecasts, setForecasts };
+    function saveForecastData(forecasts: IForecast[]) {
+        setForecasts(forecasts);
+        localStorage.setItem("forecasts", JSON.stringify(forecasts));
+        console.log(localStorage.getItem("forecasts"));
+    }
+
+    useEffect(() => {
+        const savedForecasts = localStorage.getItem("forecasts");
+        if (savedForecasts) {
+            setForecasts(JSON.parse(savedForecasts));
+        }
+    }, []);
+
+    const ForecastContextValues: IForecastValue = { forecasts, saveForecastData };
 
     return (
         <ForecastContext.Provider value={ForecastContextValues}>
