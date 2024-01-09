@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function LoggedInPage() {
     const [city, setCity] = useState("");
     const { user } = useContext(AuthContext);
-    const { setForecasts } = useContext(ForecastContext);
+    const { saveForecastData } = useContext(ForecastContext);
 
     const navigate = useNavigate();
 
@@ -20,9 +20,8 @@ export default function LoggedInPage() {
 
         // store retrieved forecasts in ForecastContext's forecasts
         if (forecasts) {
-            setForecasts(forecasts);
+            saveForecastData(forecasts);
         }
-        console.log(forecasts);
 
         navigate("/forecast");
     }
