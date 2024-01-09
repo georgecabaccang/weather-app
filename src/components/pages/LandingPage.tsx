@@ -1,3 +1,5 @@
+import ButtonComp from "../ui/ButtonComp";
+
 export default function LandingPage() {
     return (
         <div className="flex justify-center pt-[13rem]">
@@ -13,9 +15,7 @@ export default function LandingPage() {
 
                 {/* start of login button */}
                 <div>
-                    <button className="border-black border h-auto w-auto px-3 py-1 rounded">
-                        Login
-                    </button>
+                    <ButtonComp name="Login" clickFn={() => {}} />
                 </div>
                 {/* end  of login button */}
             </div>
