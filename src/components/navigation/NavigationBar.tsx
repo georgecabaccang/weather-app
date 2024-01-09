@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import BlackCloud from "../../assets/pngs/black-cloud.png";
+import ButtonComp from "../ui/ButtonComp";
 
 export default function NavigationBar() {
     return (
@@ -13,9 +14,7 @@ export default function NavigationBar() {
 
             {/* start of navigation links */}
             <div className="flex flex-grow justify-end items-center">
-                <button className="border-black border h-auto w-auto px-3 py-1 rounded">
-                    Logout
-                </button>
+                <ButtonComp name="Logout" clickFn={() => {}} />
             </div>
             {/* end of navigation links */}
         </div>
