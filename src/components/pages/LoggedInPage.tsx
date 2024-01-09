@@ -1,11 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ButtonComp from "../ui/ButtonComp";
 import { AuthContext } from "../../contexts/user";
 import { getCoordinates } from "../../requests/weatherForecastReq";
-import { ForecastContext, IForecast } from "../../contexts/weatherForecast";
+import { ForecastContext } from "../../contexts/weatherForecast";
 import { useNavigate } from "react-router-dom";
 
 export default function LoggedInPage() {
+    const [city, setCity] = useState("");
     const { user } = useContext(AuthContext);
     const { setForecasts } = useContext(ForecastContext);
 
@@ -15,12 +16,13 @@ export default function LoggedInPage() {
         event?.preventDefault();
 
         // get weather forecast for the current/next day depending if it's already past 09:00
-        const forecasts = await getCoordinates();
+        const forecasts = await getCoordinates(city);
 
         // store retrieved forecasts in ForecastContext's forecasts
         if (forecasts) {
-            setForecasts(forecasts as IForecast[]);
+            setForecasts(forecasts);
         }
+        console.log(forecasts);
 
         navigate("/forecast");
     }
@@ -36,6 +38,9 @@ export default function LoggedInPage() {
                 ) : null}
                 <form className="flex flex-col w-[50%] justify-center items-center gap-5">
                     <input
+                        onChange={(event) => {
+                            setCity(event.target.value);
+                        }}
                         className="border border-black px-9 rounded-[5rem] h-[2em] w-[90%] text-[0.9em]"
                         type="text"
                         placeholder="City"

@@ -4,7 +4,7 @@ export interface IForecast {
     country: string;
     name: string;
     state: string;
-    forecastForTheDay: {
+    forecastForTheDay?: {
         temp: number;
         description: string;
         main: string;

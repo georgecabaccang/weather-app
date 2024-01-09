@@ -1,26 +1,42 @@
 import axios from "axios";
+import { IForecast } from "../contexts/weatherForecast";
 
-export async function getCoordinates() {
+interface IForecastDetails extends IForecast {
+    latitud: number;
+    longitud: number;
+}
+
+export async function getCoordinates(city: string) {
     try {
-        const detailsPerCity = [];
+        const cities: IForecastDetails[] = [];
 
         const { data } = await axios.get(
-            "http://api.openweathermap.org/geo/1.0/direct?q=london&limit=5&appid=82577b96c5e1b7499de7fe46c36d3f4a"
+            `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=82577b96c5e1b7499de7fe46c36d3f4a`
         );
 
         if (data.length === 0) return;
-
         // use for loop since await cannot be used inside a forEach loop
         for (let i = 0; i < data.length; i++) {
-            const weatherDetails = await getWeatherForecast(data[i].lon, data[i].lat);
-            const forecastForCity = {
+            // const weatherDetails = await getWeatherForecast(data[i].lon, data[i].lat);
+            // const city = {
+            //     name: data[i].name,
+            //     state: data[i].state,
+            //     country: data[i].country,
+            // forecastForTheDay: weatherDetails,
+            // };
+            // detailsPerCity.push(forecastForCity);
+
+            const city = {
                 name: data[i].name,
                 state: data[i].state,
                 country: data[i].country,
-                forecastForTheDay: weatherDetails,
+                latitud: data[i].lat,
+                longitud: data[i].lon,
             };
-            detailsPerCity.push(forecastForCity);
+
+            cities.push(city);
         }
+        const detailsPerCity = (await getWeatherForecast(cities)) as IForecastDetails[] | undefined;
 
         return detailsPerCity;
     } catch (error) {
@@ -30,34 +46,42 @@ export async function getCoordinates() {
     }
 }
 
-async function getWeatherForecast(lat: number, lon: number) {
+async function getWeatherForecast(cities: IForecastDetails[]) {
     try {
-        const latitude = lat.toFixed(2);
-        const longitude = lon.toFixed(2);
-        const forecastDetails = {};
+        const forecastDetails = [];
 
-        // get forecast of city through lat and lon, which where first requested through Geocoding API
-        // which is then passed as arguments by getCoordinates function
-        const { data } = await axios.get(
-            `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=82577b96c5e1b7499de7fe46c36d3f4a&units=imperial`
-        );
+        for (let i = 0; i < cities.length; i++) {
+            const latitude = cities[i].latitud.toFixed(2);
+            const longitude = cities[i].longitud.toFixed(2);
 
-        // loop through returned data.list of forecasts (which is every 3 hours)
-        // get forecast only for 09:00 of the next day
-        // if time of day is still before 09:00, get forecast for current day
-        for (let i = 0; i < data.list.length; i++) {
-            if (data.list[i].dt_txt.includes("09:00")) {
-                const details = {
-                    temp: data.list[i].main.temp,
-                    description: data.list[i].weather[0].description,
-                    main: data.list[i].weather[0].main,
-                    pressure: data.list[i].main.pressure,
-                    humidity: data.list[i].main.humidity,
-                    date: data.list[i].dt,
-                };
+            // get forecast of city through lat and lon, which where first requested through Geocoding API
+            // which is then passed as arguments by getCoordinates function
+            const { data } = await axios.get(
+                `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=82577b96c5e1b7499de7fe46c36d3f4a&units=imperial`
+            );
 
-                Object.assign(forecastDetails, details);
-                break;
+            // loop through returned data.list of forecasts (which is every 3 hours)
+            // get forecast only for 09:00 of the next day
+            // if time of day is still before 09:00, get forecast for current day
+            for (let j = 0; j < data.list.length; j++) {
+                if (data.list[j].dt_txt.includes("09:00")) {
+                    const details = {
+                        name: cities[i].name,
+                        state: cities[i].state,
+                        country: cities[i].country,
+                        forecastForTheDay: {
+                            temp: data.list[j].main.temp,
+                            description: data.list[j].weather[0].description,
+                            main: data.list[j].weather[0].main,
+                            pressure: data.list[j].main.pressure,
+                            humidity: data.list[j].main.humidity,
+                            date: data.list[j].dt,
+                        },
+                    };
+
+                    forecastDetails.push(details);
+                    break;
+                }
             }
         }
         // return forecastDetails to getCoordinates function for the current/next day for 09:00

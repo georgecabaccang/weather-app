@@ -43,63 +43,63 @@ export default function WeatherPage() {
                                     forecasts.length - 1 === index ? "border-b rounded-bl-md" : ""
                                 }`}
                             >
-                                {forecast.name}
+                                {forecast?.name}
                             </td>
                             <td
                                 className={`py-2 w-[13%] border-t border-r border-black ${
                                     forecasts.length - 1 === index ? "border-b" : ""
                                 }`}
                             >
-                                {forecast.state}
+                                {forecast?.state}
                             </td>
                             <td
                                 className={`py-2 w-[11%] border-t border-r border-black ${
                                     forecasts.length - 1 === index ? "border-b" : ""
                                 }`}
                             >
-                                {forecast.country}
+                                {forecast?.country}
                             </td>
                             <td
                                 className={`py-2 w-[16%] border-t border-r border-black ${
                                     forecasts.length - 1 === index ? "border-b" : ""
                                 }`}
                             >
-                                {timeConverter(forecast.forecastForTheDay.date)}
+                                {timeConverter(forecast.forecastForTheDay!.date)}
                             </td>
                             <td
                                 className={`py-2 w-[11%] border-t border-r border-black ${
                                     forecasts.length - 1 === index ? "border-b" : ""
                                 }`}
                             >
-                                {forecast.forecastForTheDay.temp}
+                                {forecast.forecastForTheDay?.temp}
                             </td>
                             <td
                                 className={`py-2 w-[11%] border-t border-r border-black ${
                                     forecasts.length - 1 === index ? "border-b" : ""
                                 }`}
                             >
-                                {forecast.forecastForTheDay.description}
+                                {forecast.forecastForTheDay?.description}
                             </td>
                             <td
                                 className={`py-2 w-[8%] border-t border-r border-black ${
                                     forecasts.length - 1 === index ? "border-b" : ""
                                 }`}
                             >
-                                {forecast.forecastForTheDay.main}
+                                {forecast.forecastForTheDay?.main}
                             </td>
                             <td
                                 className={`py-2 w-[9%] border-t border-black ${
                                     forecasts.length - 1 === index ? "border-b" : ""
                                 }`}
                             >
-                                {forecast.forecastForTheDay.pressure}
+                                {forecast.forecastForTheDay?.pressure}
                             </td>
                             <td
                                 className={`py-2 w-[8%] border-t border-r border-l  border-black ${
                                     forecasts.length - 1 === index ? "border-b rounded-br-md" : ""
                                 }`}
                             >
-                                {forecast.forecastForTheDay.humidity}
+                                {forecast.forecastForTheDay?.humidity}
                             </td>
                         </tr>
                     );
