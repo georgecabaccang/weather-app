@@ -1,7 +1,12 @@
 import "./App.css";
+import NavigationBar from "./components/navigation/NavigationBar";
 
 function App() {
-    return <>Weather App Code Challange</>;
+    return (
+        <>
+            <NavigationBar />
+        </>
+    );
 }
 
 export default App;
