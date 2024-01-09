@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import BlackCloud from "../../assets/pngs/black-cloud.png";
 import ButtonComp from "../ui/ButtonComp";
 import { AuthContext } from "../../contexts/user";
@@ -17,9 +16,11 @@ export default function NavigationBar() {
             {/* end of logo and title */}
 
             {/* start of navigation links */}
-            <div className="flex flex-grow justify-end items-center">
-                <ButtonComp name="Logout" clickFn={logout} />
-            </div>
+            {user ? (
+                <div className="flex flex-grow justify-end items-center">
+                    <ButtonComp name="Logout" clickFn={logout} />
+                </div>
+            ) : null}
             {/* end of navigation links */}
         </div>
     );
