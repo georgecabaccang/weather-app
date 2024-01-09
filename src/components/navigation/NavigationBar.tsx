@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import BlackCloud from "../../assets/pngs/black-cloud.png";
 import ButtonComp from "../ui/ButtonComp";
+import { AuthContext } from "../../contexts/user";
+import { useContext } from "react";
 
 export default function NavigationBar() {
+    const { logout, user } = useContext(AuthContext);
+
     return (
         <div className="border-b-2 border-black h-[5rem] px-5 flex justify-between shadow-md">
             {/* start of logo and title */}
@@ -14,7 +18,7 @@ export default function NavigationBar() {
 
             {/* start of navigation links */}
             <div className="flex flex-grow justify-end items-center">
-                <ButtonComp name="Logout" clickFn={() => {}} />
+                <ButtonComp name="Logout" clickFn={logout} />
             </div>
             {/* end of navigation links */}
         </div>
