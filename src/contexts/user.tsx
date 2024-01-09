@@ -18,10 +18,6 @@ export const AuthContext = createContext<IAuth>({
 export const AuthProvider = (props: { children: ReactNode }) => {
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 
-    useEffect(() => {
-        console.log(user);
-    }, [user]);
-
     const UserContextValues: IAuth = {
         user,
         isAuthenticated,
