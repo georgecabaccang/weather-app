@@ -26,6 +26,9 @@ export const AuthProvider = (props: { children: ReactNode }) => {
     function logoutUser() {
         logout();
         localStorage.removeItem("isLoggedIn");
+
+        // also remove any forecasts date from local storage when logging out
+        localStorage.removeItem("forecasts");
     }
 
     const UserContextValues: IAuth = {

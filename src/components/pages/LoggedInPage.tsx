@@ -18,11 +18,13 @@ export default function LoggedInPage() {
         // get weather forecast for the current/next day depending if it's already past 09:00
         const forecasts = await getCoordinates(city);
 
-        // store retrieved forecasts in ForecastContext's forecasts
-        if (forecasts) {
-            saveForecastData(forecasts);
-        }
+        // return and alert user when searched city does not exist
+        if (!forecasts) return alert("City does not exist. Please try again.");
 
+        // store retrieved forecasts in ForecastContext's forecasts
+        saveForecastData(forecasts);
+
+        // navigate to WeatherPage to display results
         navigate("/forecast");
     }
 
