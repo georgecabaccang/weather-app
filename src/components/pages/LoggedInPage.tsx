@@ -29,11 +29,11 @@ export default function LoggedInPage() {
     }
 
     return (
-        <div className="flex justify-center pt-[8rem]">
-            <div className="flex flex-col gap-10 w-[50%] text-[1.2rem] items-center">
+        <div className="xxxs:pt-[5rem] flex justify-center xxxl:pt-[8rem]">
+            <div className="xxxs:w-[95%] flex flex-col gap-10 w-[50%] text-[1.2rem] xxxxl:text-[1.5rem] items-center">
                 {/* start of user details display */}
                 {user ? (
-                    <div className="flex flex-col items-center gap-5">
+                    <div className="xxxs:text-[0.8em] md:text-[1rem] lg:text-[1.1rem] xxxl:text-[1.2rem] xxxxl:text-[1.5rem] flex flex-col items-center gap-5">
                         <h1>{user?.name ? user?.name : user?.nickname}</h1>
                         <h2>{`https://github.com/${user?.nickname}`}</h2>
                     </div>
@@ -41,7 +41,7 @@ export default function LoggedInPage() {
                 {/* end of user details display */}
 
                 {/* start of search form */}
-                <form className="flex flex-col w-[50%] justify-center items-center gap-5">
+                <form className="xxxs:w-[90%] md:w-[70%] lg:w-[50%] xxxl:w-[35%] flex flex-col w-[50%] justify-center items-center gap-5">
                     <input
                         onChange={(event) => {
                             setCity(event.target.value);
@@ -50,7 +50,7 @@ export default function LoggedInPage() {
                         type="text"
                         placeholder="City"
                     />
-                    <div className="flex justify-center w-[15em] text-[0.9em]">
+                    <div className="flex justify-center w-[15em] text-[0.9em] xxxxl:text-[1.5rem]">
                         <ButtonComp name="Display Weather" clickFn={handleSearchWeatherForecast} />
                     </div>
                 </form>
