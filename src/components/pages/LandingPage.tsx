@@ -6,8 +6,8 @@ export default function LandingPage() {
     const { loginUser } = useContext(AuthContext);
 
     return (
-        <div className="flex justify-center pt-[13rem]">
-            <div className="flex flex-col gap-10 w-[50%] text-[1.2rem]">
+        <div className="xxxs:pt-[5rem] md:pt-[8rem] xxxl:pt-[13rem] flex justify-center pt-[13rem] ">
+            <div className="xxxs:w-[85%] xxxs:text-[1em] md:text-[1.4rem] lg:w-[70%] xxxl:w-[60%] xxxl:text-[1.6rem] xxxxl:text-[1.8rem] xxxxl:w-[55%] flex flex-col gap-10 w-[50%] text-[1.2rem]">
                 {/* start of paragraph */}
                 <div>
                     <p>
