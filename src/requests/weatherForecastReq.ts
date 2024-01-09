@@ -15,17 +15,8 @@ export async function getCoordinates(city: string) {
         );
 
         if (data.length === 0) return;
-        // use for loop since await cannot be used inside a forEach loop
-        for (let i = 0; i < data.length; i++) {
-            // const weatherDetails = await getWeatherForecast(data[i].lon, data[i].lat);
-            // const city = {
-            //     name: data[i].name,
-            //     state: data[i].state,
-            //     country: data[i].country,
-            // forecastForTheDay: weatherDetails,
-            // };
-            // detailsPerCity.push(forecastForCity);
 
+        for (let i = 0; i < data.length; i++) {
             const city = {
                 name: data[i].name,
                 state: data[i].state,
