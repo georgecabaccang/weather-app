@@ -1,14 +1,23 @@
 import { useContext } from "react";
 import ButtonComp from "../ui/ButtonComp";
 import { AuthContext } from "../../contexts/user";
-import { getCoordinates } from "../../requests/weatherForecast";
+import { getCoordinates } from "../../requests/weatherForecastReq";
+import { ForecastContext, IForecast } from "../../contexts/weatherForecast";
 
 export default function LoggedInPage() {
     const { user } = useContext(AuthContext);
+    const { setForecasts } = useContext(ForecastContext);
 
-    function handleSearchWeatherForecast() {
+    async function handleSearchWeatherForecast() {
         event?.preventDefault();
-        getCoordinates();
+
+        // get weather forecast for the current/next day depending if it's already past 09:00
+        const forecasts = await getCoordinates();
+
+        // store retrieved forecasts in ForecastContext's forecasts
+        if (forecasts) {
+            setForecasts(forecasts as IForecast[]);
+        }
     }
 
     return (

@@ -1,14 +1,14 @@
 import { User, useAuth0 } from "@auth0/auth0-react";
 import { ReactNode, createContext, useEffect } from "react";
 
-interface IAuthContextProps {
+interface IAuth {
     user: User | undefined;
     isAuthenticated: boolean;
     loginWithRedirect: () => void;
     logout: () => void;
 }
 
-export const AuthContext = createContext<IAuthContextProps>({
+export const AuthContext = createContext<IAuth>({
     user: undefined,
     isAuthenticated: false,
     loginWithRedirect: () => {},
@@ -22,12 +22,12 @@ export const AuthProvider = (props: { children: ReactNode }) => {
         console.log(user);
     }, [user]);
 
-    const GameContextValues: IAuthContextProps = {
+    const UserContextValues: IAuth = {
         user,
         isAuthenticated,
         loginWithRedirect,
         logout,
     };
 
-    return <AuthContext.Provider value={GameContextValues}>{props.children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={UserContextValues}>{props.children}</AuthContext.Provider>;
 };

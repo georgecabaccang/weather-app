@@ -53,6 +53,7 @@ async function getWeatherForecast(lat: number, lon: number) {
                     main: data.list[i].weather[0].main,
                     pressure: data.list[i].main.pressure,
                     humidity: data.list[i].main.humidity,
+                    date: data.list[i].dt,
                 };
 
                 Object.assign(forecastDetails, details);
