@@ -29,6 +29,8 @@ The app will be accessible at `http://localhost:5173` by default.
 - OpenWeatherMap API: We use the OpenWeatherMap API (the free one) to fetch real-time weather data.
 - Auth0: Secure authentication is implemented through Auth0, ensuring user data and login information are handled with industry-standard security practices.
 - Vite: We utilize Vite as the build tool to enhance the development and build process, making the app fast and efficient.
+- React-Router-Dom: Seamlessly traverse through the app thanks to the specialties of react-router-dom.
+- Tailwind CSS: We used Tailwind CSS to get the app up and running as soon as possible without sacrificing too much artistic design. (I am not artistic, at all.)
 
 ### How to Contribute
 We welcome contributions from the community! If you'd like to contribute to the development of the Weather Forecast App, please follow our contribution guidelines. [just kidding]
