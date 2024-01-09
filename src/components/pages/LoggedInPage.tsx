@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/user";
 import { getCoordinates } from "../../requests/weatherForecastReq";
 import { ForecastContext } from "../../contexts/weatherForecast";
 import { useNavigate } from "react-router-dom";
+import MagGlass from "../../assets/pngs/magnifying-glass.png";
 
 export default function LoggedInPage() {
     const [city, setCity] = useState("");
@@ -41,15 +42,19 @@ export default function LoggedInPage() {
                 {/* end of user details display */}
 
                 {/* start of search form */}
-                <form className="xxxs:w-[90%] md:w-[70%] lg:w-[50%] xxxl:w-[35%] flex flex-col w-[50%] justify-center items-center gap-5">
+                <form className="relative xxxs:w-[90%] md:w-[70%] lg:w-[50%] xxxl:w-[35%] flex flex-col w-[50%] justify-center items-center gap-5">
                     <input
                         onChange={(event) => {
                             setCity(event.target.value);
                         }}
-                        className="border border-black px-9 rounded-[5rem] h-[2em] w-[90%] text-[0.9em]"
+                        className=" border border-black px-10 rounded-[5rem] h-[2em] w-[90%] text-[0.9em] xxxl:px-12"
                         type="text"
                         placeholder="City"
                     />
+                    <div className="absolute w-[1em] xxxs:left-[1.4em] xs:left-[1.7em] md:left-[2em] top-[0.5em] xl:left-[2.3em] xxl:left-[2.4em]">
+                        <img src={MagGlass} alt="magnifying-glass" />
+                    </div>
+
                     <div className="flex justify-center w-[15em] text-[0.9em] xxxxl:text-[1.5rem]">
                         <ButtonComp name="Display Weather" clickFn={handleSearchWeatherForecast} />
                     </div>
