@@ -1,9 +1,15 @@
 import { useContext } from "react";
 import ButtonComp from "../ui/ButtonComp";
 import { AuthContext } from "../../contexts/user";
+import { getCoordinates } from "../../requests/weatherForecast";
 
 export default function LoggedInPage() {
     const { user } = useContext(AuthContext);
+
+    function handleSearchWeatherForecast() {
+        event?.preventDefault();
+        getCoordinates();
+    }
 
     return (
         <div className="flex justify-center pt-[8rem]">
@@ -21,7 +27,7 @@ export default function LoggedInPage() {
                         placeholder="City"
                     />
                     <div className="flex justify-center w-[15em] text-[0.9em]">
-                        <ButtonComp name="Display Weather" clickFn={() => {}} />
+                        <ButtonComp name="Display Weather" clickFn={handleSearchWeatherForecast} />
                     </div>
                 </form>
             </div>
