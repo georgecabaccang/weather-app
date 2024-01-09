@@ -20,6 +20,7 @@ export const AuthProvider = (props: { children: ReactNode }) => {
 
     function loginUser() {
         loginWithRedirect();
+        // temporary solution for login persistence, running out of time here
         localStorage.setItem("isLoggedIn", "yes");
     }
 

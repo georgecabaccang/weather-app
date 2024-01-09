@@ -10,6 +10,7 @@ export async function getCoordinates(city: string) {
     try {
         const cities: IForecastDetails[] = [];
 
+        // first get latitude and longitude of entered city
         const { data } = await axios.get(
             `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=82577b96c5e1b7499de7fe46c36d3f4a`
         );
@@ -27,8 +28,11 @@ export async function getCoordinates(city: string) {
 
             cities.push(city);
         }
+
+        // pass cities array with the latitude and longitude to search for weather forecast
         const detailsPerCity = (await getWeatherForecast(cities)) as IForecastDetails[] | undefined;
 
+        // lastly return all forecast details of cities found, and save to context and local storage
         return detailsPerCity;
     } catch (error) {
         if (error) {

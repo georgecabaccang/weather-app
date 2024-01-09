@@ -1,3 +1,4 @@
+// format unix time to be able to display date
 export function timeConverter(unixTime: number) {
     const date = new Date(unixTime * 1000);
     const year = date.getFullYear();

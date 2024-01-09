@@ -31,12 +31,16 @@ export default function LoggedInPage() {
     return (
         <div className="flex justify-center pt-[8rem]">
             <div className="flex flex-col gap-10 w-[50%] text-[1.2rem] items-center">
+                {/* start of user details display */}
                 {user ? (
                     <div className="flex flex-col items-center gap-5">
                         <h1>{user?.name ? user?.name : user?.nickname}</h1>
                         <h2>{`https://github.com/${user?.nickname}`}</h2>
                     </div>
                 ) : null}
+                {/* end of user details display */}
+
+                {/* start of search form */}
                 <form className="flex flex-col w-[50%] justify-center items-center gap-5">
                     <input
                         onChange={(event) => {
@@ -50,6 +54,7 @@ export default function LoggedInPage() {
                         <ButtonComp name="Display Weather" clickFn={handleSearchWeatherForecast} />
                     </div>
                 </form>
+                {/* end of search form */}
             </div>
         </div>
     );
