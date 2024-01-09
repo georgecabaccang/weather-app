@@ -3,10 +3,13 @@ import ButtonComp from "../ui/ButtonComp";
 import { AuthContext } from "../../contexts/user";
 import { getCoordinates } from "../../requests/weatherForecastReq";
 import { ForecastContext, IForecast } from "../../contexts/weatherForecast";
+import { useNavigate } from "react-router-dom";
 
 export default function LoggedInPage() {
     const { user } = useContext(AuthContext);
     const { setForecasts } = useContext(ForecastContext);
+
+    const navigate = useNavigate();
 
     async function handleSearchWeatherForecast() {
         event?.preventDefault();
@@ -18,6 +21,8 @@ export default function LoggedInPage() {
         if (forecasts) {
             setForecasts(forecasts as IForecast[]);
         }
+
+        navigate("/forecast");
     }
 
     return (
