@@ -1,27 +1,31 @@
 import { User, useAuth0 } from "@auth0/auth0-react";
-import { ReactNode, createContext } from "react";
+import { ReactNode, createContext, useEffect } from "react";
 
 interface IAuthContextProps {
     user: User | undefined;
     isAuthenticated: boolean;
-    loginWithPopup: () => void;
+    loginWithRedirect: () => void;
     logout: () => void;
 }
 
 export const AuthContext = createContext<IAuthContextProps>({
     user: undefined,
     isAuthenticated: false,
-    loginWithPopup: () => {},
+    loginWithRedirect: () => {},
     logout: () => {},
 });
 
 export const AuthProvider = (props: { children: ReactNode }) => {
-    const { loginWithPopup, logout, user, isAuthenticated } = useAuth0();
+    const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+
+    useEffect(() => {
+        console.log(user);
+    }, [user]);
 
     const GameContextValues: IAuthContextProps = {
         user,
         isAuthenticated,
-        loginWithPopup,
+        loginWithRedirect,
         logout,
     };
 

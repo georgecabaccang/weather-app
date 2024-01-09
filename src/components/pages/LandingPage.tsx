@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import ButtonComp from "../ui/ButtonComp";
+import { AuthContext } from "../../contexts/user";
 
 export default function LandingPage() {
+    const { loginWithRedirect } = useContext(AuthContext);
+
     return (
         <div className="flex justify-center pt-[13rem]">
             <div className="flex flex-col gap-10 w-[50%] text-[1.2rem]">
@@ -15,7 +19,7 @@ export default function LandingPage() {
 
                 {/* start of login button */}
                 <div>
-                    <ButtonComp name="Login" clickFn={() => {}} />
+                    <ButtonComp name="Login" clickFn={loginWithRedirect} />
                 </div>
                 {/* end  of login button */}
             </div>
