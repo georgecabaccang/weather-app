@@ -43,11 +43,12 @@ export const ForecastProvider = (props: { children: ReactNode }) => {
 
     function saveForecastData(forecasts: IForecast[]) {
         setForecasts(forecasts);
+        // save forecast data to local storage for data persistence
         localStorage.setItem("forecasts", JSON.stringify(forecasts));
-        console.log(localStorage.getItem("forecasts"));
     }
 
     useEffect(() => {
+        // set forecasts state with persisted forecast data in local storage
         const savedForecasts = localStorage.getItem("forecasts");
         if (savedForecasts) {
             setForecasts(JSON.parse(savedForecasts));
