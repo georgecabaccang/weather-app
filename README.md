@@ -18,7 +18,13 @@ git clone https://github.com/georgecabaccang/weather-app.git
 cd weather-app
 npm install
 ```
-3. Run the App:
+3. Add your own Auth0 Domain and Client ID in the main.tsx file
+```
+domain={<ADD DOMAIN HERE>}
+clientId={<ADD CLIENT ID HERE>}
+``` 
+ 
+4. Run the App:
 ```
 npm run dev
 ```
