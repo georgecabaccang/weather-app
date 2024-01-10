@@ -17,7 +17,7 @@ export default function NavigationBar() {
                         user ? "xxxs:hidden md:block" : "md:block"
                     }`}
                 >
-                    Weather Forcast
+                    Weather Forecast
                 </h1>
             </div>
             {/* end of logo and title */}
