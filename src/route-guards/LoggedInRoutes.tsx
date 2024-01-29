@@ -1,7 +1,8 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function LoggedInRoutes() {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const { user } = useAuth0();
 
-    return isLoggedIn ? <Outlet /> : <Navigate to="/" />;
+    return user ? <Outlet /> : <Navigate to="/" />;
 }

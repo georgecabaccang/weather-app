@@ -4,39 +4,33 @@ import { ReactNode, createContext } from "react";
 interface IAuth {
     user: User | undefined;
     isAuthenticated: boolean;
-    loginUser: () => void;
+    loginWithRedirect: () => void;
     logoutUser: () => void;
+    isLoading: boolean;
 }
 
 export const AuthContext = createContext<IAuth>({
     user: undefined,
     isAuthenticated: false,
-    loginUser: () => {},
+    loginWithRedirect: () => {},
     logoutUser: () => {},
+    isLoading: true,
 });
 
 export const AuthProvider = (props: { children: ReactNode }) => {
-    const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
-
-    function loginUser() {
-        loginWithRedirect();
-        // temporary solution for login persistence, running out of time here
-        localStorage.setItem("isLoggedIn", "yes");
-    }
+    const { loginWithRedirect, logout, user, isAuthenticated, isLoading } = useAuth0();
 
     function logoutUser() {
         logout();
-        localStorage.removeItem("isLoggedIn");
-
-        // also remove any forecasts date from local storage when logging out
         localStorage.removeItem("forecasts");
     }
 
     const UserContextValues: IAuth = {
         user,
         isAuthenticated,
-        loginUser,
+        loginWithRedirect,
         logoutUser,
+        isLoading,
     };
 
     return <AuthContext.Provider value={UserContextValues}>{props.children}</AuthContext.Provider>;

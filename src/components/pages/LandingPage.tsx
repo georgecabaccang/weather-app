@@ -3,7 +3,7 @@ import ButtonComp from "../ui/ButtonComp";
 import { AuthContext } from "../../contexts/user";
 
 export default function LandingPage() {
-    const { loginUser } = useContext(AuthContext);
+    const { loginWithRedirect } = useContext(AuthContext);
 
     return (
         <div className="xxxs:pt-[5rem] md:pt-[8rem] xxxl:pt-[13rem] flex justify-center pt-[13rem] ">
@@ -19,7 +19,7 @@ export default function LandingPage() {
 
                 {/* start of login button */}
                 <div>
-                    <ButtonComp name="Login" clickFn={loginUser} />
+                    <ButtonComp name="Login" clickFn={loginWithRedirect} />
                 </div>
                 {/* end  of login button */}
             </div>
