@@ -12,7 +12,7 @@ export async function getCoordinates(city: string) {
 
         // first get latitude and longitude of entered city
         const { data } = await axios.get(
-            `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=82577b96c5e1b7499de7fe46c36d3f4a`
+            `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=82577b96c5e1b7499de7fe46c36d3f4a`
         );
 
         if (data.length === 0) return;
@@ -52,7 +52,7 @@ async function getWeatherForecast(cities: IForecastDetails[]) {
             // get forecast of city through lat and lon, which where first requested through Geocoding API
             // which is then passed as arguments by getCoordinates function
             const { data } = await axios.get(
-                `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=82577b96c5e1b7499de7fe46c36d3f4a&units=imperial`
+                `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=82577b96c5e1b7499de7fe46c36d3f4a&units=imperial`
             );
 
             // loop through returned data.list of forecasts (which is every 3 hours)
