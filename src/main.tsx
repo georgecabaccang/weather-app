@@ -7,6 +7,8 @@ import { AuthProvider } from "./contexts/user.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { ForecastProvider } from "./contexts/weatherForecast.tsx";
 
+const urlOrigin = window.location.origin;
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <BrowserRouter>
@@ -14,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 domain={import.meta.env.VITE_DOMAIN}
                 clientId={import.meta.env.VITE_CLIENT_ID}
                 authorizationParams={{
-                    redirect_uri: "http://localhost:5173",
+                    redirect_uri: urlOrigin,
                 }}
             >
                 <AuthProvider>
